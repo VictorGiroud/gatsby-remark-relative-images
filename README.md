@@ -1,5 +1,7 @@
 # gatsby-remark-relative-images
 
+**Forked for my own (very) specific needs. Do not use at home!!!**
+
 Convert image src(s) in markdown to be relative to their node's parent directory. This will help [gatsby-remark-images](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-remark-images) match images outside the node folder. For example, use with NetlifyCMS.
 
 NOTE: This was built for use with NetlifyCMS and should be considered a temporary solution until relative paths are supported. If it works for other use cases then great!
@@ -15,17 +17,17 @@ NOTE: This was built for use with NetlifyCMS and should be considered a temporar
 plugins: [
   // Add static assets before markdown files
   {
-    resolve: 'gatsby-source-filesystem',
+    resolve: "gatsby-source-filesystem",
     options: {
       path: `${__dirname}/static/uploads`,
-      name: 'uploads',
+      name: "uploads",
     },
   },
   {
-    resolve: 'gatsby-source-filesystem',
+    resolve: "gatsby-source-filesystem",
     options: {
       path: `${__dirname}/src/pages`,
-      name: 'pages',
+      name: "pages",
     },
   },
   {
@@ -58,7 +60,7 @@ Use the exported function `fmImagesToRelative` in your `gatsby-node.js`. This ta
 
 ```js
 // gatsby-node.js
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.onCreateNode = ({ node }) => {
   fmImagesToRelative(node);
@@ -68,6 +70,7 @@ exports.onCreateNode = ({ node }) => {
 ## FAQs
 
 ### I'm getting the error: Field "image" must not have a selection since type "String" has no subfields
+
 This is a common error when working with Netlify CMS (see issue [gatsby/gatsby#5990](https://github.com/gatsbyjs/gatsby/issues/5990)).
 
 The application must include the `media` with `gatsby-source-filesystem` to include all the uploaded media and to make it available on build time. **Note:** The media folder must be included **before** the other content.
@@ -81,14 +84,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/static/assets`,
-        name: 'assets',
+        name: "assets",
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/content`,
-        name: 'content',
+        name: "content",
       },
     },
     `gatsby-transformer-sharp`,
@@ -107,6 +110,5 @@ module.exports = {
     },
     `gatsby-plugin-netlify-cms`,
   ],
-}
+};
 ```
-
