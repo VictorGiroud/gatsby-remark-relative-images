@@ -115,7 +115,8 @@ module.exports.fmImagesToRelative = (node) => {
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     // Convert paths in Markdown Body
     node.internal.content = node.internal.content.replace(/(!\[.*?\]\()(.+?)(\))/g, function (whole, a, b, c) {
-      return a + b.startsWith("/") ? "../../../static" : "" + b + c;
+      const relativePath = b.startsWith("/") ? "../../../static" : "";
+      return a + relativePath + b + c;
     });
     // Convert paths in frontmatter to relative
     function makeRelative(value) {
